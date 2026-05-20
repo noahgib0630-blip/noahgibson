@@ -65,7 +65,7 @@
     #hero {
       min-height: 100vh;
       display: flex; align-items: center;
-      padding: 8rem 6% 4rem;
+      padding: 0 6%;
       position: relative; overflow: hidden;
     }
     .hero-bg {
@@ -89,12 +89,22 @@
 
     .hero-inner {
       position: relative; z-index: 1;
-      display: flex; align-items: center;
-      justify-content: space-between;
-      width: 100%; gap: 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+      width: 100%;
+      min-height: 100vh;
+      gap: 0;
     }
 
-    .hero-content { max-width: 560px; }
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 3rem 4rem 0;
+      max-width: 560px;
+    }
+
     .hero-badge {
       display: inline-flex; align-items: center; gap: 0.5rem;
       background: rgba(79,142,247,0.1); border: 1px solid rgba(79,142,247,0.3);
@@ -112,7 +122,7 @@
       50% { opacity: 0.5; transform: scale(0.8); }
     }
     .hero-title {
-      font-size: clamp(3rem, 6vw, 5rem);
+      font-size: clamp(3rem, 5vw, 4.5rem);
       font-weight: 900; line-height: 1.05; margin-bottom: 1rem;
       animation: fadeUp 0.8s 0.2s ease both;
     }
@@ -154,60 +164,35 @@
 
     /* ── HERO PHOTO ── */
     .hero-photo-wrap {
-      position: relative; z-index: 1;
-      flex-shrink: 0;
-      animation: fadeUp 1s 0.5s ease both;
+      position: relative;
+      display: flex;
+      align-items: stretch;
+      overflow: hidden;
+      animation: fadeIn 1.2s 0.3s ease both;
     }
     .hero-photo {
-      width: 380px;
-      height: 480px;
+      width: 100%;
+      height: 100%;
+      min-height: 100vh;
       object-fit: cover;
       object-position: top center;
-      border-radius: 24px;
       display: block;
-      border: 1px solid rgba(79,142,247,0.2);
-      box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 60px rgba(45,108,223,0.15);
     }
-    .hero-photo-glow {
-      position: absolute; inset: -20px;
-      background: radial-gradient(ellipse at center, rgba(45,108,223,0.2) 0%, transparent 70%);
-      border-radius: 40px; z-index: -1;
+    .hero-photo-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, var(--navy) 0%, transparent 30%),
+                  linear-gradient(to top, var(--navy) 0%, transparent 20%);
+      pointer-events: none;
     }
-
-    /* ── HERO ROLES (hidden — replaced by photo) ── */
-    .hero-roles { display: none; }
 
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
-    /* ── STATS BAR ── */
-    .stats-bar {
-      background: rgba(255,255,255,0.03);
-      border-top: 1px solid rgba(79,142,247,0.1);
-      border-bottom: 1px solid rgba(79,142,247,0.1);
-      padding: 2rem 6%;
-      display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap;
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
-    .stat-item { text-align: center; }
-    .stat-num { font-size: 2rem; font-weight: 900; color: var(--bright); display: block; }
-    .stat-label { font-size: 0.8rem; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
-
-    /* ── SECTIONS SHARED ── */
-    section { padding: 6rem 6%; }
-    .section-label {
-      display: inline-block; color: var(--bright); font-size: 0.8rem; font-weight: 700;
-      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.8rem;
-    }
-    .section-title {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 800; line-height: 1.2; margin-bottom: 1rem;
-    }
-    .section-title em {
-      font-family: 'Playfair Display', serif; font-style: italic; color: var(--bright);
-    }
-    .section-desc { color: var(--muted); font-size: 1.05rem; line-height: 1.8; max-width: 600px; }
 
     /* ── ABOUT ── */
     #about {
@@ -265,7 +250,12 @@
     .exp-card.featured::before { transform: scaleX(1); }
     .exp-date { font-size: 0.75rem; font-weight: 700; color: var(--bright); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.5rem; }
     .exp-role { font-size: 1.1rem; font-weight: 800; color: var(--text); margin-bottom: 0.3rem; }
-    .exp-org { font-size: 0.9rem; color: var(--muted); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.4rem; }
+    .exp-org {
+      font-size: 0.9rem; color: var(--bright); margin-bottom: 1rem;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      text-decoration: none; transition: color 0.3s;
+    }
+    .exp-org:hover { color: var(--text); text-decoration: underline; }
     .exp-bullets { list-style: none; }
     .exp-bullets li {
       font-size: 0.85rem; color: var(--muted); line-height: 1.6;
@@ -276,20 +266,49 @@
     /* ── EDUCATION ── */
     #education { background: linear-gradient(180deg, var(--dark) 0%, var(--navy) 100%); }
     .edu-header { text-align: center; margin-bottom: 4rem; }
-    .edu-grid { display: flex; flex-direction: column; gap: 1.5rem; max-width: 800px; margin: 0 auto; }
-    .edu-card {
-      background: rgba(255,255,255,0.03); border: 1px solid rgba(79,142,247,0.15);
-      border-radius: 16px; padding: 2rem; display: flex; gap: 1.5rem; align-items: flex-start; transition: all 0.3s;
+    .edu-list { display: flex; flex-direction: column; gap: 2rem; max-width: 800px; margin: 0 auto; }
+
+    .edu-entry {
+      border-left: 3px solid var(--accent);
+      padding: 0 0 0 2rem;
+      position: relative;
+      transition: all 0.3s;
     }
-    .edu-card:hover { border-color: rgba(79,142,247,0.3); background: rgba(79,142,247,0.05); transform: translateX(5px); }
-    .edu-icon {
-      width: 50px; height: 50px; border-radius: 12px;
-      background: linear-gradient(135deg, var(--blue), var(--accent));
-      display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0;
+    .edu-entry::before {
+      content: '';
+      position: absolute;
+      left: -7px; top: 6px;
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      background: var(--bright);
+      border: 2px solid var(--navy);
     }
-    .edu-degree { font-size: 1rem; font-weight: 700; color: var(--text); }
-    .edu-school { font-size: 0.9rem; color: var(--bright); margin: 0.2rem 0; }
-    .edu-year { font-size: 0.8rem; color: var(--muted); }
+    .edu-entry:hover { border-left-color: var(--bright); }
+
+    .edu-institution {
+      font-size: 0.75rem; font-weight: 700; color: var(--bright);
+      letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 0.4rem;
+    }
+    .edu-year-tag {
+      display: inline-block;
+      font-size: 0.7rem; color: var(--muted);
+      background: rgba(79,142,247,0.08);
+      border: 1px solid rgba(79,142,247,0.2);
+      padding: 0.15rem 0.6rem; border-radius: 50px;
+      margin-left: 0.6rem; vertical-align: middle;
+    }
+    .edu-degrees { display: flex; flex-direction: column; gap: 0.4rem; margin-top: 0.5rem; }
+    .edu-degree-item {
+      font-size: 1rem; font-weight: 700; color: var(--text);
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .edu-degree-item::before {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
 
     /* ── STRENGTHS ── */
     #strengths { background: var(--navy); position: relative; overflow: hidden; }
@@ -414,6 +433,21 @@
     .footer-name span { color: var(--bright); }
     .footer-copy { font-size: 0.8rem; color: var(--muted); }
 
+    /* ── SECTIONS SHARED ── */
+    section { padding: 6rem 6%; }
+    .section-label {
+      display: inline-block; color: var(--bright); font-size: 0.8rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800; line-height: 1.2; margin-bottom: 1rem;
+    }
+    .section-title em {
+      font-family: 'Playfair Display', serif; font-style: italic; color: var(--bright);
+    }
+    .section-desc { color: var(--muted); font-size: 1.05rem; line-height: 1.8; max-width: 600px; }
+
     /* ── SCROLL ANIMATIONS ── */
     .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -424,11 +458,12 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
-      .hero-inner { flex-direction: column; text-align: center; }
-      .hero-content { max-width: 100%; }
-      .hero-subtitle { max-width: 100%; }
+      .hero-inner { grid-template-columns: 1fr; min-height: auto; }
+      .hero-content { padding: 8rem 0 3rem; max-width: 100%; text-align: center; }
       .hero-buttons { justify-content: center; }
-      .hero-photo { width: 280px; height: 350px; }
+      .hero-subtitle { max-width: 100%; }
+      .hero-photo-wrap { min-height: 60vw; }
+      .hero-photo { min-height: 60vw; }
       .about-grid { grid-template-columns: 1fr; gap: 3rem; }
       .exp-grid { grid-template-columns: 1fr; }
       .strengths-grid { grid-template-columns: 1fr 1fr; }
@@ -437,9 +472,7 @@
     }
     @media (max-width: 600px) {
       section { padding: 4rem 5%; }
-      .stats-bar { gap: 2rem; }
       .strengths-grid { grid-template-columns: 1fr; }
-      .hero-photo { width: 240px; height: 300px; }
     }
   </style>
 </head>
@@ -488,31 +521,11 @@
       </div>
 
       <div class="hero-photo-wrap">
-        <div class="hero-photo-glow"></div>
         <img src="323A5972.jpg" alt="Noah Gibson" class="hero-photo" />
+        <div class="hero-photo-overlay"></div>
       </div>
     </div>
   </section>
-
-  <!-- STATS -->
-  <div class="stats-bar">
-    <div class="stat-item reveal">
-      <span class="stat-num">5+</span>
-      <span class="stat-label">Years in Ministry</span>
-    </div>
-    <div class="stat-item reveal">
-      <span class="stat-num">100+</span>
-      <span class="stat-label">Students Reached</span>
-    </div>
-    <div class="stat-item reveal">
-      <span class="stat-num">40%</span>
-      <span class="stat-label">Main Service Teaching</span>
-    </div>
-    <div class="stat-item reveal">
-      <span class="stat-num">36+</span>
-      <span class="stat-label">Leaders Developed</span>
-    </div>
-  </div>
 
   <!-- ABOUT -->
   <section id="about">
@@ -561,10 +574,13 @@
       <h2 class="section-title">Ministry <em>Experience</em></h2>
     </div>
     <div class="exp-grid">
+
       <div class="exp-card featured reveal">
         <div class="exp-date">June 2024 – Present</div>
         <div class="exp-role">Associate Pastor of Small Groups</div>
-        <div class="exp-org">Blackhawk Ministries · Fort Wayne, IN</div>
+        <a href="https://blackhawkministries.org" target="_blank" rel="noopener" class="exp-org">
+          Blackhawk Ministries · Fort Wayne, IN ↗
+        </a>
         <ul class="exp-bullets">
           <li>Leads the small groups ministry including seasonal launches and leader development</li>
           <li>Oversees the First Impressions Team across hospitality, parking, and greeting</li>
@@ -573,10 +589,13 @@
           <li>Mentors key leaders, fostering spiritual maturity and multiplying ministry influence</li>
         </ul>
       </div>
+
       <div class="exp-card reveal">
         <div class="exp-date">August 2021 – June 2024</div>
         <div class="exp-role">Youth Pastor</div>
-        <div class="exp-org">The Pointe Church · Fort Wayne, IN</div>
+        <a href="https://www.thepointe.church" target="_blank" rel="noopener" class="exp-org">
+          The Pointe Church · Fort Wayne, IN ↗
+        </a>
         <ul class="exp-bullets">
           <li>Developed and mentored a team of 12 leaders who shared the vision of the ministry</li>
           <li>Achieved steady growth with 40 students regularly participating</li>
@@ -584,10 +603,13 @@
           <li>Created a thriving, spiritually enriching environment for youth</li>
         </ul>
       </div>
+
       <div class="exp-card reveal">
         <div class="exp-date">May 2022 – October 2023</div>
         <div class="exp-role">Interim Teaching Pastor</div>
-        <div class="exp-org">The Pointe Church · Fort Wayne, IN</div>
+        <a href="https://www.thepointe.church" target="_blank" rel="noopener" class="exp-org">
+          The Pointe Church · Fort Wayne, IN ↗
+        </a>
         <ul class="exp-bullets">
           <li>Led 40% of main service teachings during a transitional phase</li>
           <li>Responsible for sermon writing while fulfilling youth pastor duties</li>
@@ -595,10 +617,13 @@
           <li>Pioneered implementation of a Growth Track course for new visitors</li>
         </ul>
       </div>
+
       <div class="exp-card reveal">
         <div class="exp-date">May 2020 – August 2021</div>
         <div class="exp-role">Director of Youth Discipleship</div>
-        <div class="exp-org">Calvert Grace Community Church · Owings, MD</div>
+        <a href="https://calvertgrace.org" target="_blank" rel="noopener" class="exp-org">
+          Calvert Grace Community Church · Owings, MD ↗
+        </a>
         <ul class="exp-bullets">
           <li>Took over a ministry with no existing youth programming and transformed it</li>
           <li>Recruited and trained 24 dedicated leaders to support the mission</li>
@@ -606,6 +631,7 @@
           <li>Led youth ministry successfully through the Covid-19 closure period</li>
         </ul>
       </div>
+
     </div>
   </section>
 
@@ -615,31 +641,29 @@
       <span class="section-label">Academic Background</span>
       <h2 class="section-title">Education & <em>Training</em></h2>
     </div>
-    <div class="edu-grid">
-      <div class="edu-card reveal">
-        <div class="edu-icon">🎓</div>
-        <div>
-          <div class="edu-degree">Master of Divinity</div>
-          <div class="edu-school">Liberty University</div>
-          <div class="edu-year">Expected Graduation — June 2027</div>
+    <div class="edu-list">
+
+      <div class="edu-entry reveal">
+        <div class="edu-institution">
+          Liberty University
+          <span class="edu-year-tag">Expected June 2027</span>
+        </div>
+        <div class="edu-degrees">
+          <div class="edu-degree-item">Master of Divinity</div>
         </div>
       </div>
-      <div class="edu-card reveal">
-        <div class="edu-icon">📖</div>
-        <div>
-          <div class="edu-degree">Bachelor of Science in Biblical Studies</div>
-          <div class="edu-school">Grace College & Theological Seminary</div>
-          <div class="edu-year">Graduated June 2020</div>
+
+      <div class="edu-entry reveal">
+        <div class="edu-institution">
+          Grace College & Theological Seminary
+          <span class="edu-year-tag">Graduated June 2020</span>
+        </div>
+        <div class="edu-degrees">
+          <div class="edu-degree-item">Bachelor of Science in Biblical Studies</div>
+          <div class="edu-degree-item">Bachelor of Science in Youth Ministry</div>
         </div>
       </div>
-      <div class="edu-card reveal">
-        <div class="edu-icon">🙌</div>
-        <div>
-          <div class="edu-degree">Bachelor of Science in Youth Ministry</div>
-          <div class="edu-school">Grace College & Theological Seminary</div>
-          <div class="edu-year">Graduated June 2020</div>
-        </div>
-      </div>
+
     </div>
   </section>
 
@@ -658,9 +682,7 @@
         <div class="strength-icon">💡</div>
         <div class="strength-name">LIV Style</div>
         <div class="strength-type">Values Assessment</div>
-        <p class="strength-detail">
-          Driven by <strong>Impact, Relationships & Vision</strong> — motivated by meaningful work that shapes people and culture.
-        </p>
+        <p class="strength-detail">Driven by <strong>Impact, Relationships & Vision</strong> — motivated by meaningful work that shapes people and culture.</p>
         <span class="pdf-badge">📄 View Full Report</span>
       </a>
 
@@ -668,9 +690,7 @@
         <div class="strength-icon">⚙️</div>
         <div class="strength-name">Working Genius</div>
         <div class="strength-type">Work Style</div>
-        <p class="strength-detail">
-          Genius in <strong>Galvanizing & Enablement</strong> — energized by rallying people around a vision and equipping them to execute.
-        </p>
+        <p class="strength-detail">Genius in <strong>Galvanizing & Enablement</strong> — energized by rallying people around a vision and equipping them to execute.</p>
         <span class="pdf-badge">📄 View Full Report</span>
       </a>
 
@@ -678,9 +698,7 @@
         <div class="strength-icon">🏆</div>
         <div class="strength-name">Clifton Strengths</div>
         <div class="strength-type">Talent Profile</div>
-        <p class="strength-detail">
-          Top 5: <strong>Communication · Activator · WOO · Maximizer · Positivity</strong>
-        </p>
+        <p class="strength-detail">Top 5: <strong>Communication · Activator · WOO · Maximizer · Positivity</strong></p>
         <span class="pdf-badge">📄 View Full Report</span>
       </a>
 
@@ -688,9 +706,7 @@
         <div class="strength-icon">🧠</div>
         <div class="strength-name">Myers-Briggs</div>
         <div class="strength-type">Personality Type</div>
-        <p class="strength-detail">
-          <strong>ENFJ — "The Protagonist"</strong> — charismatic, empathetic, and driven to inspire others toward growth and transformation.
-        </p>
+        <p class="strength-detail"><strong>ENFJ — "The Protagonist"</strong> — charismatic, empathetic, and driven to inspire others toward growth and transformation.</p>
         <span class="pdf-badge">📄 View Full Report</span>
       </a>
 
@@ -698,9 +714,7 @@
         <div class="strength-icon">🔢</div>
         <div class="strength-name">Enneagram</div>
         <div class="strength-type">Character Profile</div>
-        <p class="strength-detail">
-          <strong>Type 3 — The Achiever</strong> — goal-oriented, adaptable, and motivated to inspire others through accomplishment and excellence.
-        </p>
+        <p class="strength-detail"><strong>Type 3 — The Achiever</strong> — goal-oriented, adaptable, and motivated to inspire others through accomplishment and excellence.</p>
         <span class="pdf-badge">📄 View Full Report</span>
       </a>
 
@@ -708,9 +722,7 @@
         <div class="strength-icon">📊</div>
         <div class="strength-name">DISC Profile</div>
         <div class="strength-type">Behavioral Style</div>
-        <p class="strength-detail">
-          <strong>High D/I</strong> — decisive and results-driven, with a natural ability to influence and energize those around him.
-        </p>
+        <p class="strength-detail"><strong>High D/I</strong> — decisive and results-driven, with a natural ability to influence and energize those around him.</p>
         <span class="pdf-badge">📄 View Full Report</span>
       </a>
 
@@ -798,6 +810,13 @@
   </footer>
 
   <script>
+    // ── Force scroll to top on load ──
+    if (history.scrollRestoration) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
+    // ── Scroll reveal ──
     const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
@@ -809,6 +828,7 @@
     }, { threshold: 0.1 });
     revealEls.forEach(el => observer.observe(el));
 
+    // ── Parallax ──
     window.addEventListener('scroll', () => {
       const scrollY = window.scrollY;
       const heroBg = document.querySelector('.hero-bg');
@@ -821,6 +841,7 @@
       if (orb2) orb2.style.transform = `translateY(${scrollY * -0.1}px)`;
     });
 
+    // ── Nav scroll style ──
     window.addEventListener('scroll', () => {
       const nav = document.getElementById('navbar');
       if (window.scrollY > 50) {
@@ -831,32 +852,6 @@
         nav.style.boxShadow = 'none';
       }
     });
-
-    const counters = document.querySelectorAll('.stat-num');
-    const countObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          const text = el.textContent;
-          const num = parseFloat(text);
-          const suffix = text.replace(/[\d.]/g, '');
-          let start = 0;
-          const duration = 1500;
-          const step = (timestamp) => {
-            if (!start) start = timestamp;
-            const progress = Math.min((timestamp - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            el.textContent = (Number.isInteger(num)
-              ? Math.floor(eased * num)
-              : (eased * num).toFixed(0)) + suffix;
-            if (progress < 1) requestAnimationFrame(step);
-          };
-          requestAnimationFrame(step);
-          countObserver.unobserve(el);
-        }
-      });
-    }, { threshold: 0.5 });
-    counters.forEach(c => countObserver.observe(c));
   </script>
 </body>
 </html>
