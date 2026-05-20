@@ -1,840 +1,596 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Noah Gibson | Pastor & Communicator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --navy: #0a0f1e;
-      --dark: #0d1526;
-      --blue: #1a3a6b;
-      --accent: #2d6cdf;
-      --bright: #4f8ef7;
-      --glow: rgba(79,142,247,0.15);
-      --text: #e8edf5;
-      --muted: #8a9bb5;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noah Gibson</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Georgia', serif;
+            background: #faf9f7;
+            color: #2c2c2c;
+        }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--navy);
-      color: var(--text);
-      overflow-x: hidden;
-    }
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(250, 249, 247, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid #e8e4de;
+        }
 
-    /* ── SCROLLBAR ── */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--navy); }
-    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+        .nav-logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2c2c2c;
+            letter-spacing: 1px;
+        }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 1.2rem 6%;
-      background: rgba(10,15,30,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(79,142,247,0.1);
-      transition: all 0.3s ease;
-    }
-    .nav-logo {
-      font-size: 1.3rem; font-weight: 800; letter-spacing: 0.5px;
-      color: var(--text);
-    }
-    .nav-logo span { color: var(--bright); }
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a {
-      color: var(--muted); text-decoration: none; font-size: 0.9rem;
-      font-weight: 500; letter-spacing: 0.3px;
-      transition: color 0.3s;
-      position: relative;
-    }
-    .nav-links a::after {
-      content: ''; position: absolute; bottom: -4px; left: 0;
-      width: 0; height: 2px; background: var(--bright);
-      transition: width 0.3s;
-    }
-    .nav-links a:hover { color: var(--bright); }
-    .nav-links a:hover::after { width: 100%; }
-    .nav-cta {
-      background: var(--accent); color: #fff !important;
-      padding: 0.5rem 1.2rem; border-radius: 50px;
-      font-weight: 600 !important;
-    }
-    .nav-cta:hover { background: var(--bright); }
-    .nav-cta::after { display: none !important; }
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            margin-left: 30px;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            font-family: 'Arial', sans-serif;
+        }
 
-    /* ── HERO ── */
-    #hero {
-      min-height: 100vh;
-      display: flex; align-items: center;
-      padding: 8rem 6% 4rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute; inset: 0; z-index: 0;
-      background: radial-gradient(ellipse at 70% 50%, rgba(45,108,223,0.18) 0%, transparent 60%),
-                  radial-gradient(ellipse at 20% 80%, rgba(79,142,247,0.1) 0%, transparent 50%),
-                  linear-gradient(135deg, #0a0f1e 0%, #0d1526 100%);
-    }
-    .hero-grid {
-      position: absolute; inset: 0; z-index: 0; opacity: 0.04;
-      background-image: linear-gradient(var(--bright) 1px, transparent 1px),
-                        linear-gradient(90deg, var(--bright) 1px, transparent 1px);
-      background-size: 60px 60px;
-    }
-    .hero-orb {
-      position: absolute; border-radius: 50%;
-      filter: blur(80px); z-index: 0; pointer-events: none;
-    }
-    .orb1 { width: 500px; height: 500px; background: rgba(45,108,223,0.12); top: -100px; right: 10%; }
-    .orb2 { width: 300px; height: 300px; background: rgba(79,142,247,0.08); bottom: 10%; left: 5%; }
+        .nav-links a:hover { color: #8b6f47; }
 
-    .hero-content { position: relative; z-index: 1; max-width: 700px; }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      background: rgba(79,142,247,0.1); border: 1px solid rgba(79,142,247,0.3);
-      color: var(--bright); padding: 0.4rem 1rem; border-radius: 50px;
-      font-size: 0.8rem; font-weight: 600; letter-spacing: 1px;
-      text-transform: uppercase; margin-bottom: 1.5rem;
-      animation: fadeUp 0.8s ease both;
-    }
-    .badge-dot {
-      width: 7px; height: 7px; background: var(--bright);
-      border-radius: 50%; animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.8); }
-    }
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 40px 80px;
+            max-width: 1100px;
+            margin: 0 auto;
+            gap: 60px;
+        }
 
-    .hero-title {
-      font-size: clamp(3rem, 7vw, 5.5rem);
-      font-weight: 900; line-height: 1.05;
-      margin-bottom: 1rem;
-      animation: fadeUp 0.8s 0.2s ease both;
-    }
-    .hero-title .line2 {
-      font-family: 'Playfair Display', serif;
-      font-style: italic; color: var(--bright);
-    }
-    .hero-subtitle {
-      font-size: 1.1rem; color: var(--muted); line-height: 1.7;
-      max-width: 520px; margin-bottom: 2.5rem;
-      animation: fadeUp 0.8s 0.4s ease both;
-    }
-    .hero-subtitle strong { color: var(--text); }
-    .hero-buttons {
-      display: flex; gap: 1rem; flex-wrap: wrap;
-      animation: fadeUp 0.8s 0.6s ease both;
-    }
-    .btn-primary {
-      background: var(--accent); color: #fff;
-      padding: 0.85rem 2rem; border-radius: 50px;
-      text-decoration: none; font-weight: 700; font-size: 0.95rem;
-      transition: all 0.3s; box-shadow: 0 0 30px rgba(45,108,223,0.4);
-      display: inline-flex; align-items: center; gap: 0.5rem;
-    }
-    .btn-primary:hover {
-      background: var(--bright); transform: translateY(-2px);
-      box-shadow: 0 0 40px rgba(79,142,247,0.5);
-    }
-    .btn-secondary {
-      background: transparent; color: var(--text);
-      padding: 0.85rem 2rem; border-radius: 50px;
-      text-decoration: none; font-weight: 600; font-size: 0.95rem;
-      border: 1px solid rgba(79,142,247,0.3);
-      transition: all 0.3s;
-      display: inline-flex; align-items: center; gap: 0.5rem;
-    }
-    .btn-secondary:hover {
-      border-color: var(--bright); color: var(--bright);
-      transform: translateY(-2px);
-    }
+        .hero-text { flex: 1; }
 
-    .hero-roles {
-      position: absolute; right: 6%; top: 50%; transform: translateY(-50%);
-      z-index: 1;
-      display: flex; flex-direction: column; gap: 1rem;
-      animation: fadeLeft 1s 0.8s ease both;
-    }
-    .role-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(79,142,247,0.2);
-      backdrop-filter: blur(10px);
-      padding: 1rem 1.5rem; border-radius: 12px;
-      display: flex; align-items: center; gap: 0.8rem;
-      transition: all 0.3s;
-    }
-    .role-card:hover {
-      background: rgba(79,142,247,0.1);
-      border-color: rgba(79,142,247,0.4);
-      transform: translateX(-5px);
-    }
-    .role-icon { font-size: 1.3rem; }
-    .role-text { font-size: 0.85rem; font-weight: 600; color: var(--text); }
-    .role-sub { font-size: 0.75rem; color: var(--muted); }
+        .hero-text .greeting {
+            font-family: 'Arial', sans-serif;
+            font-size: 0.95rem;
+            color: #8b6f47;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeLeft {
-      from { opacity: 0; transform: translate(30px, -50%); }
-      to { opacity: 1; transform: translate(0, -50%); }
-    }
+        .hero-text h1 {
+            font-size: 3.5rem;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
 
-    /* ── STATS BAR ── */
-    .stats-bar {
-      background: rgba(255,255,255,0.03);
-      border-top: 1px solid rgba(79,142,247,0.1);
-      border-bottom: 1px solid rgba(79,142,247,0.1);
-      padding: 2rem 6%;
-      display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap;
-    }
-    .stat-item { text-align: center; }
-    .stat-num {
-      font-size: 2rem; font-weight: 900; color: var(--bright);
-      display: block;
-    }
-    .stat-label { font-size: 0.8rem; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+        .hero-text p {
+            font-size: 1.15rem;
+            color: #666;
+            line-height: 1.8;
+            max-width: 480px;
+        }
 
-    /* ── SECTIONS SHARED ── */
-    section { padding: 6rem 6%; }
-    .section-label {
-      display: inline-block;
-      color: var(--bright); font-size: 0.8rem; font-weight: 700;
-      letter-spacing: 2px; text-transform: uppercase;
-      margin-bottom: 0.8rem;
-    }
-    .section-title {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 800; line-height: 1.2;
-      margin-bottom: 1rem;
-    }
-    .section-title em {
-      font-family: 'Playfair Display', serif;
-      font-style: italic; color: var(--bright);
-    }
-    .section-desc {
-      color: var(--muted); font-size: 1.05rem;
-      line-height: 1.8; max-width: 600px;
-    }
+        .hero-image {
+            flex: 0 0 340px;
+            height: 420px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+        }
 
-    /* ── ABOUT ── */
-    #about {
-      background: linear-gradient(180deg, var(--navy) 0%, var(--dark) 100%);
-      position: relative; overflow: hidden;
-    }
-    #about::before {
-      content: ''; position: absolute;
-      top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    }
-    .about-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 5rem; align-items: center; max-width: 1100px; margin: 0 auto;
-    }
-    .about-image-wrap {
-      position: relative;
-    }
-    .about-image-placeholder {
-      width: 100%; aspect-ratio: 3/4;
-      background: linear-gradient(135deg, var(--blue) 0%, var(--accent) 100%);
-      border-radius: 20px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 5rem; color: rgba(255,255,255,0.3);
-      position: relative; overflow: hidden;
-    }
-    .about-image-placeholder::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(10,15,30,0.6) 0%, transparent 60%);
-    }
-    .about-tag {
-      position: absolute; bottom: -15px; right: -15px;
-      background: var(--accent); color: #fff;
-      padding: 1rem 1.5rem; border-radius: 12px;
-      font-weight: 700; font-size: 0.9rem;
-      box-shadow: 0 10px 30px rgba(45,108,223,0.4);
-    }
-    .about-tag span { display: block; font-size: 0.75rem; font-weight: 400; opacity: 0.8; }
-    .about-text { }
-    .about-bio {
-      color: var(--muted); line-height: 1.9; font-size: 1.05rem;
-      margin-bottom: 2rem;
-    }
-    .about-bio p { margin-bottom: 1rem; }
-    .about-bio strong { color: var(--text); }
-    .values-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 1rem; margin-top: 2rem;
-    }
-    .value-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(79,142,247,0.15);
-      padding: 1rem; border-radius: 10px;
-      transition: all 0.3s;
-    }
-    .value-card:hover {
-      background: rgba(79,142,247,0.08);
-      border-color: rgba(79,142,247,0.3);
-      transform: translateY(-3px);
-    }
-    .value-icon { font-size: 1.4rem; margin-bottom: 0.4rem; }
-    .value-title { font-size: 0.85rem; font-weight: 700; color: var(--text); }
-    .value-desc { font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem; }
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-    /* ── EXPERIENCE ── */
-    #experience {
-      background: var(--navy);
-      position: relative;
-    }
-    .exp-header { text-align: center; margin-bottom: 4rem; }
-    .exp-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 2rem; max-width: 1100px; margin: 0 auto;
-    }
-    .exp-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(79,142,247,0.15);
-      border-radius: 16px; padding: 2rem;
-      position: relative; overflow: hidden;
-      transition: all 0.3s;
-    }
-    .exp-card::before {
-      content: ''; position: absolute;
-      top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, var(--accent), var(--bright));
-      transform: scaleX(0); transform-origin: left;
-      transition: transform 0.3s;
-    }
-    .exp-card:hover { transform: translateY(-5px); border-color: rgba(79,142,247,0.3); }
-    .exp-card:hover::before { transform: scaleX(1); }
-    .exp-card.featured {
-      border-color: rgba(79,142,247,0.3);
-      background: rgba(45,108,223,0.08);
-    }
-    .exp-card.featured::before { transform: scaleX(1); }
-    .exp-date {
-      font-size: 0.75rem; font-weight: 700; color: var(--bright);
-      letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.5rem;
-    }
-    .exp-role {
-      font-size: 1.1rem; font-weight: 800; color: var(--text);
-      margin-bottom: 0.3rem;
-    }
-    .exp-org {
-      font-size: 0.9rem; color: var(--muted); margin-bottom: 1rem;
-      display: flex; align-items: center; gap: 0.4rem;
-    }
-    .exp-org::before { content: '📍'; font-size: 0.8rem; }
-    .exp-bullets { list-style: none; }
-    .exp-bullets li {
-      font-size: 0.85rem; color: var(--muted); line-height: 1.6;
-      padding: 0.3rem 0; padding-left: 1rem; position: relative;
-    }
-    .exp-bullets li::before {
-      content: '→'; position: absolute; left: 0;
-      color: var(--bright); font-size: 0.8rem;
-    }
+        /* SECTIONS */
+        section {
+            padding: 90px 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
 
-    /* ── EDUCATION ── */
-    #education {
-      background: linear-gradient(180deg, var(--dark) 0%, var(--navy) 100%);
-    }
-    .edu-header { text-align: center; margin-bottom: 4rem; }
-    .edu-grid {
-      display: flex; flex-direction: column; gap: 1.5rem;
-      max-width: 800px; margin: 0 auto;
-    }
-    .edu-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(79,142,247,0.15);
-      border-radius: 16px; padding: 2rem;
-      display: flex; gap: 1.5rem; align-items: flex-start;
-      transition: all 0.3s;
-    }
-    .edu-card:hover {
-      border-color: rgba(79,142,247,0.3);
-      background: rgba(79,142,247,0.05);
-      transform: translateX(5px);
-    }
-    .edu-icon {
-      width: 50px; height: 50px; border-radius: 12px;
-      background: linear-gradient(135deg, var(--blue), var(--accent));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.3rem; flex-shrink: 0;
-    }
-    .edu-degree { font-size: 1rem; font-weight: 700; color: var(--text); }
-    .edu-school { font-size: 0.9rem; color: var(--bright); margin: 0.2rem 0; }
-    .edu-year { font-size: 0.8rem; color: var(--muted); }
+        .section-label {
+            font-family: 'Arial', sans-serif;
+            font-size: 0.85rem;
+            color: #8b6f47;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
 
-    /* ── STRENGTHS ── */
-    #strengths {
-      background: var(--navy);
-      position: relative; overflow: hidden;
-    }
-    #strengths::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 50% 50%, rgba(45,108,223,0.08) 0%, transparent 70%);
-    }
-    .strengths-header { text-align: center; margin-bottom: 4rem; position: relative; }
-    .strengths-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem; max-width: 1000px; margin: 0 auto; position: relative;
-    }
-    .strength-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(79,142,247,0.15);
-      border-radius: 16px; padding: 2rem; text-align: center;
-      transition: all 0.4s; cursor: default;
-    }
-    .strength-card:hover {
-      background: rgba(45,108,223,0.12);
-      border-color: var(--accent);
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(45,108,223,0.2);
-    }
-    .strength-icon { font-size: 2rem; margin-bottom: 0.8rem; }
-    .strength-name { font-size: 1rem; font-weight: 800; color: var(--text); margin-bottom: 0.3rem; }
-    .strength-type { font-size: 0.75rem; color: var(--bright); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+        .section-title {
+            font-size: 2.2rem;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
 
-    /* ── CONTACT ── */
-    #contact {
-      background: linear-gradient(180deg, var(--dark) 0%, #060a14 100%);
-      text-align: center; position: relative; overflow: hidden;
-    }
-    #contact::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 50% 0%, rgba(45,108,223,0.15) 0%, transparent 60%);
-    }
-    .contact-inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
-    .contact-title {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 900; margin-bottom: 1rem;
-    }
-    .contact-title em {
-      font-family: 'Playfair Display', serif;
-      font-style: italic; color: var(--bright);
-    }
-    .contact-desc {
-      color: var(--muted); font-size: 1.1rem; line-height: 1.8;
-      margin-bottom: 2.5rem;
-    }
-    .contact-email {
-      display: inline-flex; align-items: center; gap: 0.8rem;
-      background: rgba(45,108,223,0.15); border: 1px solid rgba(79,142,247,0.3);
-      color: var(--bright); padding: 1rem 2rem; border-radius: 50px;
-      text-decoration: none; font-weight: 700; font-size: 1rem;
-      transition: all 0.3s; margin-bottom: 2rem;
-    }
-    .contact-email:hover {
-      background: var(--accent); color: #fff;
-      box-shadow: 0 0 40px rgba(45,108,223,0.4);
-      transform: translateY(-3px);
-    }
+        .section-divider {
+            width: 50px;
+            height: 3px;
+            background: #8b6f47;
+            margin-bottom: 40px;
+        }
 
-    /* ── FOOTER ── */
-    footer {
-      background: #060a14;
-      border-top: 1px solid rgba(79,142,247,0.1);
-      padding: 2rem 6%;
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 1rem;
-    }
-    .footer-name { font-weight: 700; color: var(--text); }
-    .footer-name span { color: var(--bright); }
-    .footer-copy { font-size: 0.8rem; color: var(--muted); }
+        /* ABOUT */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
 
-    /* ── SCROLL ANIMATIONS ── */
-    .reveal {
-      opacity: 0; transform: translateY(40px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-left {
-      opacity: 0; transform: translateX(-40px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal-left.visible { opacity: 1; transform: translateX(0); }
-    .reveal-right {
-      opacity: 0; transform: translateX(40px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+        .about-image {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            height: 420px;
+        }
 
-    /* ── PARALLAX ── */
-    .parallax-section { will-change: transform; }
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      .hero-roles { display: none; }
-      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .exp-grid { grid-template-columns: 1fr; }
-      .strengths-grid { grid-template-columns: 1fr 1fr; }
-      .nav-links { display: none; }
-    }
-    @media (max-width: 600px) {
-      section { padding: 4rem 5%; }
-      .stats-bar { gap: 2rem; }
-      .strengths-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+        .about-text p {
+            font-size: 1.05rem;
+            color: #555;
+            line-height: 1.9;
+            margin-bottom: 20px;
+        }
+
+        /* SERMONS */
+        .sermons-outer {
+            background: #f3efe9;
+            padding: 80px 0;
+        }
+
+        .sermons-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .sermons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+            margin-top: 40px;
+        }
+
+        .sermon-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .sermon-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+        }
+
+        .sermon-thumbnail {
+            width: 100%;
+            height: 170px;
+            background: #1a1a1a;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sermon-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+            transition: opacity 0.3s;
+        }
+
+        .sermon-card:hover .sermon-thumbnail img {
+            opacity: 1;
+        }
+
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 52px;
+            height: 52px;
+            background: rgba(255,255,255,0.92);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            padding-left: 4px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        }
+
+        .sermon-info {
+            padding: 20px;
+        }
+
+        .sermon-info .sermon-series {
+            font-family: 'Arial', sans-serif;
+            font-size: 0.78rem;
+            color: #8b6f47;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .sermon-info h3 {
+            font-size: 1.05rem;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .sermon-info p {
+            font-size: 0.88rem;
+            color: #888;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* PERSONALITY */
+        .strengths-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .strength-card {
+            background: white;
+            border: 1px solid #e8e4de;
+            border-radius: 12px;
+            padding: 28px;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            cursor: pointer;
+        }
+
+        .strength-card:hover {
+            border-color: #8b6f47;
+            box-shadow: 0 8px 30px rgba(139, 111, 71, 0.12);
+            transform: translateY(-3px);
+        }
+
+        .strength-emoji {
+            font-size: 2rem;
+            margin-bottom: 14px;
+            display: block;
+        }
+
+        .strength-card h3 {
+            font-size: 1rem;
+            color: #1a1a1a;
+            margin-bottom: 6px;
+        }
+
+        .strength-card .result {
+            font-family: 'Arial', sans-serif;
+            font-size: 0.95rem;
+            color: #8b6f47;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .strength-card p {
+            font-size: 0.88rem;
+            color: #888;
+            line-height: 1.6;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .view-results {
+            display: inline-block;
+            margin-top: 14px;
+            font-family: 'Arial', sans-serif;
+            font-size: 0.8rem;
+            color: #8b6f47;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-bottom: 1px solid #8b6f47;
+            padding-bottom: 2px;
+        }
+
+        /* CONTACT */
+        .contact-outer {
+            text-align: center;
+            padding: 90px 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .contact-outer p {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.8;
+            max-width: 540px;
+            margin: 0 auto 36px;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            padding: 16px 40px;
+            background: #2c2c2c;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-family: 'Arial', sans-serif;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            transition: background 0.3s;
+        }
+
+        .contact-btn:hover { background: #8b6f47; }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid #e8e4de;
+            padding: 30px 40px;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            font-size: 0.85rem;
+            color: #aaa;
+        }
+
+        /* FADE IN ANIMATION */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero { flex-direction: column; padding: 100px 24px 60px; gap: 40px; }
+            .hero-text h1 { font-size: 2.4rem; }
+            .hero-image { flex: 0 0 auto; width: 100%; height: 300px; }
+            .about-grid { grid-template-columns: 1fr; }
+            .sermons-inner { padding: 0 24px; }
+            nav { padding: 16px 24px; }
+            .nav-links a { margin-left: 16px; font-size: 0.85rem; }
+            section { padding: 60px 24px; }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav id="navbar">
-    <div class="nav-logo">Noah <span>Gibson</span></div>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#strengths">Strengths</a></li>
-      <li><a href="#contact" class="nav-cta">Contact</a></li>
-    </ul>
-  </nav>
-
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-grid"></div>
-    <div class="hero-orb orb1"></div>
-    <div class="hero-orb orb2"></div>
-
-    <div class="hero-content">
-      <div class="hero-badge">
-        <div class="badge-dot"></div>
-        Associate Pastor · Fort Wayne, IN
-      </div>
-      <h1 class="hero-title">
-        Hi, I'm Noah<br>
-        <span class="line2">Gibson.</span>
-      </h1>
-      <p class="hero-subtitle">
-        A communicator driven by a passion to help others
-        <strong>Find and Follow Jesus</strong> — empowering the Church
-        to lead with excellence, reach the lost, and cultivate the next
-        generation of leaders.
-      </p>
-      <div class="hero-buttons">
-        <a href="#about" class="btn-primary">Learn More →</a>
-        <a href="#contact" class="btn-secondary">Get in Touch</a>
-      </div>
-    </div>
-
-    <div class="hero-roles">
-      <div class="role-card">
-        <div class="role-icon">⛪</div>
-        <div>
-          <div class="role-text">Associate Pastor</div>
-          <div class="role-sub">Blackhawk Ministries</div>
+    <!-- NAV -->
+    <nav>
+        <div class="nav-logo">Noah Gibson</div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#sermons">Sermons</a>
+            <a href="#strengths">Strengths</a>
+            <a href="#contact">Contact</a>
         </div>
-      </div>
-      <div class="role-card">
-        <div class="role-icon">🎤</div>
-        <div>
-          <div class="role-text">Communicator</div>
-          <div class="role-sub">Speaker & Teacher</div>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hero">
+        <div class="hero-text fade-in">
+            <div class="greeting">Welcome</div>
+            <h1>Hi, I'm Noah Gibson.</h1>
+            <p>Husband, father, pastor, and Fort Wayne local — passionate about people, the local church, and the everyday moments where faith becomes real. Glad you're here.</p>
         </div>
-      </div>
-      <div class="role-card">
-        <div class="role-icon">📖</div>
-        <div>
-          <div class="role-text">Disciple Maker</div>
-          <div class="role-sub">Leader Developer</div>
+        <div class="hero-image fade-in">
+            <img src="323A5972.jpg" alt="Noah Gibson">
         </div>
-      </div>
     </div>
-  </section>
 
-  <!-- STATS -->
-  <div class="stats-bar">
-    <div class="stat-item reveal">
-      <span class="stat-num">5+</span>
-      <span class="stat-label">Years in Ministry</span>
-    </div>
-    <div class="stat-item reveal">
-      <span class="stat-num">100+</span>
-      <span class="stat-label">Students Reached</span>
-    </div>
-    <div class="stat-item reveal">
-      <span class="stat-num">40%</span>
-      <span class="stat-label">Main Service Teaching</span>
-    </div>
-    <div class="stat-item reveal">
-      <span class="stat-num">36+</span>
-      <span class="stat-label">Leaders Developed</span>
-    </div>
-  </div>
-
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="about-grid">
-      <div class="about-image-wrap reveal-left">
-        <div class="about-image-placeholder">🙏</div>
-        <div class="about-tag">
-          Available for Speaking
-          <span>Conferences · Churches · Events</span>
+    <!-- ABOUT -->
+    <section id="about">
+        <div class="about-grid">
+            <div class="about-image fade-in">
+                <img src="failing.jpg" alt="Noah and his family">
+            </div>
+            <div class="about-text fade-in">
+                <div class="section-label">About Me</div>
+                <h2 class="section-title">More than a title.</h2>
+                <div class="section-divider"></div>
+                <p>I'm a pastor — but that's not the most interesting thing about me. I'm a husband and a dad first, and everything I do flows from that.</p>
+                <p>I believe the church is most powerful when it's honest, when it makes room for doubt, and when it looks more like a family than a program. That conviction has shaped every role I've served in.</p>
+                <p>I grew up with deep roots in Fort Wayne, Indiana. Outside of ministry, you'll find me in the workshop doing woodworking, out on a trail hiking with my family, or tinkering with the latest tech. I'm someone who loves building things — whether that's furniture, community, or a team worth being part of.</p>
+            </div>
         </div>
-      </div>
-      <div class="about-text reveal-right">
-        <span class="section-label">About Me</span>
-        <h2 class="section-title">Passionate about <em>people</em> & purpose</h2>
-        <div class="about-bio">
-          <p>Noah Gibson is a communicator and Associate Pastor based in Fort Wayne, IN, driven by a profound passion to help others <strong>Find and Follow Jesus.</strong></p>
-          <p>He wholeheartedly believes in the significance of the Church conducting its work with <strong>Excellence, Diligence, and a fervent heart for God.</strong> Noah aspires to empower the church to cultivate leaders and shepherd their congregation with the mission of reaching the lost, the hurting, and those neglected in life.</p>
-          <p>In his personal life, Noah finds joy in his marriage to his dedicated ministry partner, <strong>Caroline</strong>, and together they are raising two daughters, Finley and Holland.</p>
+    </section>
+
+    <!-- SERMONS -->
+    <div class="sermons-outer" id="sermons">
+        <div class="sermons-inner">
+            <div class="section-label fade-in">Recent Sermons</div>
+            <h2 class="section-title fade-in">A few messages worth hearing.</h2>
+            <div class="section-divider fade-in"></div>
+            <p class="fade-in" style="color:#666; font-size:1rem; line-height:1.8; max-width:600px;">These aren't polished performances — they're honest conversations about faith, doubt, and what it means to follow Jesus in real life.</p>
+
+            <div class="sermons-grid">
+
+                <a href="https://youtu.be/9nGLFxqDWFs?si=8Rk2GVcYVv9S-3_p" target="_blank" class="sermon-card fade-in">
+                    <div class="sermon-thumbnail">
+                        <img src="https://img.youtube.com/vi/9nGLFxqDWFs/hqdefault.jpg" alt="Sermon thumbnail">
+                        <div class="play-icon">&#9654;</div>
+                    </div>
+                    <div class="sermon-info">
+                        <div class="sermon-series">Recent Message</div>
+                        <h3>Watch on YouTube</h3>
+                        <p>Click to view this sermon</p>
+                    </div>
+                </a>
+
+                <a href="https://youtu.be/NGQu94dqGGU?si=EQG0lLjzlyrKEJCz" target="_blank" class="sermon-card fade-in">
+                    <div class="sermon-thumbnail">
+                        <img src="https://img.youtube.com/vi/NGQu94dqGGU/hqdefault.jpg" alt="Sermon thumbnail">
+                        <div class="play-icon">&#9654;</div>
+                    </div>
+                    <div class="sermon-info">
+                        <div class="sermon-series">Recent Message</div>
+                        <h3>Watch on YouTube</h3>
+                        <p>Click to view this sermon</p>
+                    </div>
+                </a>
+
+                <a href="https://youtu.be/L3nDwW9g4bc?si=6WCEJ6EsAvI5QIDm" target="_blank" class="sermon-card fade-in">
+                    <div class="sermon-thumbnail">
+                        <img src="https://img.youtube.com/vi/L3nDwW9g4bc/hqdefault.jpg" alt="Sermon thumbnail">
+                        <div class="play-icon">&#9654;</div>
+                    </div>
+                    <div class="sermon-info">
+                        <div class="sermon-series">Recent Message</div>
+                        <h3>Watch on YouTube</h3>
+                        <p>Click to view this sermon</p>
+                    </div>
+                </a>
+
+                <a href="https://youtu.be/qnHV7M6kwvo?si=rlFEkiVkC5LeRDEv" target="_blank" class="sermon-card fade-in">
+                    <div class="sermon-thumbnail">
+                        <img src="https://img.youtube.com/vi/qnHV7M6kwvo/hqdefault.jpg" alt="Sermon thumbnail">
+                        <div class="play-icon">&#9654;</div>
+                    </div>
+                    <div class="sermon-info">
+                        <div class="sermon-series">Recent Message</div>
+                        <h3>Watch on YouTube</h3>
+                        <p>Click to view this sermon</p>
+                    </div>
+                </a>
+
+                <a href="https://youtu.be/d9vqiwJcAIo?si=brc1ZX9tHIN6A8Ca" target="_blank" class="sermon-card fade-in">
+                    <div class="sermon-thumbnail">
+                        <img src="https://img.youtube.com/vi/d9vqiwJcAIo/hqdefault.jpg" alt="Sermon thumbnail">
+                        <div class="play-icon">&#9654;</div>
+                    </div>
+                    <div class="sermon-info">
+                        <div class="sermon-series">Recent Message</div>
+                        <h3>Watch on YouTube</h3>
+                        <p>Click to view this sermon</p>
+                    </div>
+                </a>
+
+            </div>
         </div>
-        <div class="values-grid">
-          <div class="value-card">
-            <div class="value-icon">✝️</div>
-            <div class="value-title">Gospel-Centered</div>
-            <div class="value-desc">Everything flows from the mission of Jesus</div>
-          </div>
-          <div class="value-card">
-            <div class="value-icon">🌱</div>
-            <div class="value-title">Leader Development</div>
-            <div class="value-desc">Multiplying influence through mentorship</div>
-          </div>
-          <div class="value-card">
-            <div class="value-icon">🏛️</div>
-            <div class="value-title">Church Excellence</div>
-            <div class="value-desc">Serving with diligence and intentionality</div>
-          </div>
-          <div class="value-card">
-            <div class="value-icon">🤝</div>
-            <div class="value-title">Community</div>
-            <div class="value-desc">Building genuine connection and belonging</div>
-          </div>
+    </div>
+
+    <!-- STRENGTHS & PERSONALITY -->
+    <section id="strengths">
+        <div class="section-label fade-in">How I'm Wired</div>
+        <h2 class="section-title fade-in">Strengths & Personality</h2>
+        <div class="section-divider fade-in"></div>
+        <p class="fade-in" style="color:#666; font-size:1rem; line-height:1.8; max-width:620px; margin-bottom:40px;">I believe self-awareness makes you a better leader, teammate, and friend. Here's a look at how I'm wired — click any card to see the full results.</p>
+
+        <div class="strengths-grid">
+
+            <a href="https://www.findyourlivstyle.com" target="_blank" class="strength-card fade-in">
+                <span class="strength-emoji">🎨</span>
+                <h3>LIV Style</h3>
+                <div class="result">The Designer</div>
+                <p>Power-Promotion-Process mix. Big picture thinker with a drive for results, a persuasive edge, and high standards for quality.</p>
+                <span class="view-results">View Results</span>
+            </a>
+
+            <a href="https://www.workinggenius.com" target="_blank" class="strength-card fade-in">
+                <span class="strength-emoji">⚙️</span>
+                <h3>Working Genius</h3>
+                <div class="result">Invention + Discernment</div>
+                <p>Naturally gifted at generating original ideas and using intuition to evaluate whether they'll actually work — the "Discriminating Ideator."</p>
+                <span class="view-results">View Results</span>
+            </a>
+
+            <a href="https://www.gallup.com/cliftonstrengths" target="_blank" class="strength-card fade-in">
+                <span class="strength-emoji">💪</span>
+                <h3>Clifton Strengths</h3>
+                <div class="result">Includer · Belief · Adaptability · Positivity · Developer</div>
+                <p>Wired to bring people in, stay grounded in core values, and meet people where they are — while helping them grow.</p>
+                <span class="view-results">View Results</span>
+            </a>
+
+            <a href="https://www.myersbriggs.org" target="_blank" class="strength-card fade-in">
+                <span class="strength-emoji">🧠</span>
+                <h3>Myers-Briggs</h3>
+                <div class="result">ESFP</div>
+                <p>Energized by people, present-focused, and deeply in tune with the emotions in a room. Brings warmth and spontaneity to every interaction.</p>
+                <span class="view-results">View Results</span>
+            </a>
+
+            <a href="https://www.enneagraminstitute.com/type-2" target="_blank" class="strength-card fade-in">
+                <span class="strength-emoji">🔢</span>
+                <h3>Enneagram</h3>
+                <div class="result">Type 2 — The Helper</div>
+                <p>Empathetic, warm-hearted, and driven to be close to others. Finds deep meaning in serving people and building genuine relationships.</p>
+                <span class="view-results">View Results</span>
+            </a>
+
+            <a href="https://www.discprofile.com" target="_blank" class="strength-card fade-in">
+                <span class="strength-emoji">📊</span>
+                <h3>DISC Profile</h3>
+                <div class="result">Influence · Steadiness · Dominance</div>
+                <p>Leads with relational influence and steady presence, with a results-oriented drive underneath. Connects easily and moves people to action.</p>
+                <span class="view-results">View Results</span>
+            </a>
+
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <div class="exp-header reveal">
-      <span class="section-label">Work History</span>
-      <h2 class="section-title">Ministry <em>Experience</em></h2>
-    </div>
-    <div class="exp-grid">
-      <div class="exp-card featured reveal">
-        <div class="exp-date">June 2024 – Present</div>
-        <div class="exp-role">Associate Pastor of Small Groups</div>
-        <div class="exp-org">Blackhawk Ministries · Fort Wayne, IN</div>
-        <ul class="exp-bullets">
-          <li>Leads the small groups ministry including seasonal launches and leader development</li>
-          <li>Oversees the First Impressions Team across hospitality, parking, and greeting</li>
-          <li>Serves on the Teaching Team, contributing to sermon planning and preaching</li>
-          <li>Plans and executes major church-wide events and outreach initiatives</li>
-          <li>Mentors key leaders, fostering spiritual maturity and multiplying ministry influence</li>
-        </ul>
-      </div>
-      <div class="exp-card reveal">
-        <div class="exp-date">August 2021 – June 2024</div>
-        <div class="exp-role">Youth Pastor</div>
-        <div class="exp-org">The Pointe Church · Fort Wayne, IN</div>
-        <ul class="exp-bullets">
-          <li>Developed and mentored a team of 12 leaders who shared the vision of the ministry</li>
-          <li>Achieved steady growth with 40 students regularly participating</li>
-          <li>Prioritized leader development, resulting in high staff retention rates</li>
-          <li>Created a thriving, spiritually enriching environment for youth</li>
-        </ul>
-      </div>
-      <div class="exp-card reveal">
-        <div class="exp-date">May 2022 – October 2023</div>
-        <div class="exp-role">Interim Teaching Pastor</div>
-        <div class="exp-org">The Pointe Church · Fort Wayne, IN</div>
-        <ul class="exp-bullets">
-          <li>Led 40% of main service teachings during a transitional phase</li>
-          <li>Responsible for sermon writing while fulfilling youth pastor duties</li>
-          <li>Led teaching team meetings and contributed to sermon series vision</li>
-          <li>Pioneered implementation of a Growth Track course for new visitors</li>
-        </ul>
-      </div>
-      <div class="exp-card reveal">
-        <div class="exp-date">May 2020 – August 2021</div>
-        <div class="exp-role">Director of Youth Discipleship</div>
-        <div class="exp-org">Calvert Grace Community Church · Owings, MD</div>
-        <ul class="exp-bullets">
-          <li>Took over a ministry with no existing youth programming and transformed it</li>
-          <li>Recruited and trained 24 dedicated leaders to support the mission</li>
-          <li>Grew attendance to 100 middle and high school students regularly</li>
-          <li>Led youth ministry successfully through the Covid-19 closure period</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+    <!-- CONTACT -->
+    <section id="contact" class="contact-outer">
+        <div class="section-label">Get In Touch</div>
+        <h2 class="section-title">Let's connect.</h2>
+        <div class="section-divider" style="margin: 0 auto 30px;"></div>
+        <p>Whether you want to grab coffee, talk ministry, or just say hello — my inbox is always open.</p>
+        <a href="mailto:noahgib0630@gmail.com" class="contact-btn">Send a Message</a>
+    </section>
 
-  <!-- EDUCATION -->
-  <section id="education">
-    <div class="edu-header reveal">
-      <span class="section-label">Academic Background</span>
-      <h2 class="section-title">Education & <em>Training</em></h2>
-    </div>
-    <div class="edu-grid">
-      <div class="edu-card reveal">
-        <div class="edu-icon">🎓</div>
-        <div>
-          <div class="edu-degree">Master of Divinity</div>
-          <div class="edu-school">Liberty University</div>
-          <div class="edu-year">Expected Graduation — June 2027</div>
-        </div>
-      </div>
-      <div class="edu-card reveal">
-        <div class="edu-icon">📖</div>
-        <div>
-          <div class="edu-degree">Bachelor of Science in Biblical Studies</div>
-          <div class="edu-school">Grace College & Theological Seminary</div>
-          <div class="edu-year">Graduated June 2020</div>
-        </div>
-      </div>
-      <div class="edu-card reveal">
-        <div class="edu-icon">🙌</div>
-        <div>
-          <div class="edu-degree">Bachelor of Science in Youth Ministry</div>
-          <div class="edu-school">Grace College & Theological Seminary</div>
-          <div class="edu-year">Graduated June 2020</div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- FOOTER -->
+    <footer>
+        <p>Noah Gibson &middot; Fort Wayne, IN</p>
+    </footer>
 
-  <!-- STRENGTHS -->
-  <section id="strengths">
-    <div class="strengths-header reveal">
-      <span class="section-label">Assessments & Profiles</span>
-      <h2 class="section-title">Personality & <em>Strengths</em></h2>
-      <p class="section-desc" style="margin: 0 auto; text-align:center;">
-        A snapshot of the assessments that shape how Noah leads, communicates, and serves.
-      </p>
-    </div>
-    <div class="strengths-grid">
-      <div class="strength-card reveal">
-        <div class="strength-icon">💡</div>
-        <div class="strength-name">LIV Style</div>
-        <div class="strength-type">Values Assessment</div>
-      </div>
-      <div class="strength-card reveal">
-        <div class="strength-icon">⚙️</div>
-        <div class="strength-name">Working Genius</div>
-        <div class="strength-type">Work Style</div>
-      </div>
-      <div class="strength-card reveal">
-        <div class="strength-icon">🏆</div>
-        <div class="strength-name">Clifton Strengths</div>
-        <div class="strength-type">Talent Profile</div>
-      </div>
-      <div class="strength-card reveal">
-        <div class="strength-icon">🧠</div>
-        <div class="strength-name">Myers-Briggs</div>
-        <div class="strength-type">Personality Type</div>
-      </div>
-      <div class="strength-card reveal">
-        <div class="strength-icon">🔢</div>
-        <div class="strength-name">Enneagram</div>
-        <div class="strength-type">Character Profile</div>
-      </div>
-      <div class="strength-card reveal">
-        <div class="strength-icon">📊</div>
-        <div class="strength-name">DISC Profile</div>
-        <div class="strength-type">Behavioral Style</div>
-      </div>
-    </div>
-  </section>
+    <script>
+        // Scroll fade-in
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.12 });
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="contact-inner">
-      <span class="section-label reveal">Let's Connect</span>
-      <h2 class="contact-title reveal">Let's do something <em>great</em> together.</h2>
-      <p class="contact-desc reveal">
-        Whether you're looking for a speaker, want to connect about ministry,
-        or simply want to say hello — Noah would love to hear from you.
-      </p>
-      <a href="mailto:hello@noahgibson.com" class="contact-email reveal">
-        ✉️ hello@noahgibson.com
-      </a>
-    </div>
-  </section>
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-name">Noah <span>Gibson</span></div>
-    <div class="footer-copy">© 2026 Noah Gibson · Pastor & Communicator · Fort Wayne, IN</div>
-  </footer>
+        // Trigger hero on load
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.hero .fade-in').forEach((el, i) => {
+                setTimeout(() => el.classList.add('visible'), i * 200);
+            });
+        });
+    </script>
 
-  <script>
-    // ── SCROLL REVEAL ──
-    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), i * 80);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    revealEls.forEach(el => observer.observe(el));
-
-    // ── PARALLAX ──
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      const heroBg = document.querySelector('.hero-bg');
-      const heroGrid = document.querySelector('.hero-grid');
-      const orb1 = document.querySelector('.orb1');
-      const orb2 = document.querySelector('.orb2');
-      if (heroBg) heroBg.style.transform = `translateY(${scrollY * 0.3}px)`;
-      if (heroGrid) heroGrid.style.transform = `translateY(${scrollY * 0.15}px)`;
-      if (orb1) orb1.style.transform = `translateY(${scrollY * 0.2}px)`;
-      if (orb2) orb2.style.transform = `translateY(${scrollY * -0.1}px)`;
-    });
-
-    // ── NAV SCROLL EFFECT ──
-    window.addEventListener('scroll', () => {
-      const nav = document.getElementById('navbar');
-      if (window.scrollY > 50) {
-        nav.style.background = 'rgba(10,15,30,0.97)';
-        nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.3)';
-      } else {
-        nav.style.background = 'rgba(10,15,30,0.85)';
-        nav.style.boxShadow = 'none';
-      }
-    });
-
-    // ── SMOOTH COUNTER ANIMATION ──
-    const counters = document.querySelectorAll('.stat-num');
-    const countObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          const text = el.textContent;
-          const num = parseFloat(text);
-          const suffix = text.replace(/[\d.]/g, '');
-          let start = 0;
-          const duration = 1500;
-          const step = (timestamp) => {
-            if (!start) start = timestamp;
-            const progress = Math.min((timestamp - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            el.textContent = (Number.isInteger(num)
-              ? Math.floor(eased * num)
-              : (eased * num).toFixed(0)) + suffix;
-            if (progress < 1) requestAnimationFrame(step);
-          };
-          requestAnimationFrame(step);
-          countObserver.unobserve(el);
-        }
-      });
-    }, { threshold: 0.5 });
-    counters.forEach(c => countObserver.observe(c));
-  </script>
 </body>
 </html>
