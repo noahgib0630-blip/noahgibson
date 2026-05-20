@@ -391,6 +391,7 @@
       transition: all 0.4s; cursor: pointer;
       text-decoration: none; color: inherit;
       display: block;
+      position: relative;
     }
     .strength-card:hover {
       background: rgba(45,108,223,0.12);
@@ -406,6 +407,21 @@
       line-height: 1.6; text-align: left;
     }
     .strength-detail strong { color: var(--text); }
+    .pdf-badge {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      margin-top: 1rem;
+      background: rgba(79,142,247,0.12);
+      border: 1px solid rgba(79,142,247,0.25);
+      color: var(--bright);
+      font-size: 0.7rem; font-weight: 600;
+      padding: 0.3rem 0.7rem; border-radius: 50px;
+      letter-spacing: 0.5px;
+      transition: all 0.3s;
+    }
+    .strength-card:hover .pdf-badge {
+      background: rgba(79,142,247,0.25);
+      border-color: var(--bright);
+    }
 
     /* ── CONTACT ── */
     #contact {
@@ -721,58 +737,70 @@
     </div>
     <div class="strengths-grid">
 
-      <a href="https://www.livsmart.com" target="_blank" rel="noopener" class="strength-card reveal">
+      <!-- LIV Style -->
+      <a href="livstyle.pdf" target="_blank" rel="noopener" class="strength-card reveal">
         <div class="strength-icon">💡</div>
         <div class="strength-name">LIV Style</div>
         <div class="strength-type">Values Assessment</div>
         <p class="strength-detail">
           Driven by <strong>Impact, Relationships & Vision</strong> — motivated by meaningful work that shapes people and culture.
         </p>
+        <span class="pdf-badge">📄 View Full Report</span>
       </a>
 
-      <a href="https://www.workinggenius.com" target="_blank" rel="noopener" class="strength-card reveal">
+      <!-- Working Genius -->
+      <a href="working_genius.pdf" target="_blank" rel="noopener" class="strength-card reveal">
         <div class="strength-icon">⚙️</div>
         <div class="strength-name">Working Genius</div>
         <div class="strength-type">Work Style</div>
         <p class="strength-detail">
           Genius in <strong>Galvanizing & Enablement</strong> — energized by rallying people around a vision and equipping them to execute.
         </p>
+        <span class="pdf-badge">📄 View Full Report</span>
       </a>
 
-      <a href="https://www.gallup.com/cliftonstrengths/en/253715/34-cliftonstrengths-themes.aspx" target="_blank" rel="noopener" class="strength-card reveal">
+      <!-- Clifton Strengths -->
+      <a href="clifton_strengths.pdf" target="_blank" rel="noopener" class="strength-card reveal">
         <div class="strength-icon">🏆</div>
         <div class="strength-name">Clifton Strengths</div>
         <div class="strength-type">Talent Profile</div>
         <p class="strength-detail">
           Top 5: <strong>Communication · Activator · WOO · Maximizer · Positivity</strong>
         </p>
+        <span class="pdf-badge">📄 View Full Report</span>
       </a>
 
-      <a href="https://www.myersbriggs.org" target="_blank" rel="noopener" class="strength-card reveal">
+      <!-- Myers-Briggs -->
+      <a href="mbti.pdf" target="_blank" rel="noopener" class="strength-card reveal">
         <div class="strength-icon">🧠</div>
         <div class="strength-name">Myers-Briggs</div>
         <div class="strength-type">Personality Type</div>
         <p class="strength-detail">
           <strong>ENFJ — "The Protagonist"</strong> — charismatic, empathetic, and driven to inspire others toward growth and transformation.
         </p>
+        <span class="pdf-badge">📄 View Full Report</span>
       </a>
 
-      <a href="https://www.enneagraminstitute.com" target="_blank" rel="noopener" class="strength-card reveal">
+      <!-- Enneagram -->
+      <a href="Enneagram.pdf" target="_blank" rel="noopener" class="strength-card reveal">
         <div class="strength-icon">🔢</div>
         <div class="strength-name">Enneagram</div>
         <div class="strength-type">Character Profile</div>
         <p class="strength-detail">
           <strong>Type 3 — The Achiever</strong> — goal-oriented, adaptable, and motivated to inspire others through accomplishment and excellence.
         </p>
+        <span class="pdf-badge">📄 View Full Report</span>
       </a>
 
-      <a href="https://www.discprofile.com" target="_blank" rel="noopener" class="strength-card reveal">
+      <!-- DISC -->
+      <a href="DISC.pdf" target="_blank" rel="noopener" class="strength-card reveal">
         <div class="strength-icon">📊</div>
         <div class="strength-name">DISC Profile</div>
         <div class="strength-type">Behavioral Style</div>
         <p class="strength-detail">
           <strong>High D/I</strong> — decisive and results-driven, with a natural ability to influence and energize those around him.
         </p>
+        <span class="pdf-badge">📄 View Full Report</span>
       </a>
 
     </div>
