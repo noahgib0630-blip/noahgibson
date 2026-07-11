@@ -418,10 +418,117 @@
       text-decoration: none; font-weight: 700; font-size: 1rem;
       transition: all 0.3s; margin-bottom: 2rem;
     }
-    .contact-email:hover {
-      background: var(--accent); color: #fff;
-      box-shadow: 0 0 40px rgba(45,108,223,0.4); transform: translateY(-3px);
+        /* ── CONTACT MODAL ── */
+    .contact-email {
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
     }
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(6,10,20,0.85);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-content {
+      background: linear-gradient(160deg, var(--dark) 0%, var(--navy) 100%);
+      border: 1px solid rgba(79,142,247,0.25);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 60px rgba(45,108,223,0.15);
+      padding: 2.8rem;
+      border-radius: 20px;
+      max-width: 480px;
+      width: 100%;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+      text-align: left;
+    }
+    .modal-heading {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--bright);
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .modal-subtext {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.8rem;
+    }
+    .modal-close {
+      position: absolute;
+      top: 1.2rem; right: 1.4rem;
+      font-size: 1.8rem;
+      background: none; border: none;
+      cursor: pointer;
+      color: var(--muted);
+      transition: color 0.3s;
+      line-height: 1;
+    }
+    .modal-close:hover { color: var(--bright); }
+    .form-group { margin-bottom: 1.1rem; }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-size: 0.8rem; font-weight: 600;
+      color: var(--text);
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(79,142,247,0.2);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--bright);
+      background: rgba(79,142,247,0.06);
+    }
+    .form-group select option { background: var(--dark); color: var(--text); }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .submit-button {
+      width: 100%;
+      padding: 0.9rem;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-weight: 700; font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 0 30px rgba(45,108,223,0.4);
+    }
+    .submit-button:hover {
+      background: var(--bright);
+      box-shadow: 0 0 40px rgba(79,142,247,0.5);
+    }
+    .submit-button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .form-success { display: none; text-align: center; padding: 1rem 0; }
+    .form-success.active { display: block; }
+    .form-success-icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
+    .form-success h3 {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--bright);
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .form-success p { color: var(--muted); font-size: 0.9rem; }
 
     /* ── FOOTER ── */
     footer {
@@ -797,9 +904,52 @@
         Whether you're looking for a speaker, want to connect about ministry,
         or simply want to say hello — Noah would love to hear from you.
       </p>
-      <a href="mailto:noahgib0630@gmail.com" class="contact-email reveal">
-        noahgib0630@gmail.com
-      </a>
+      <button id="openFormBtn" class="contact-email reveal">
+  noahgib0630@gmail.com
+</button>
+
+<div id="formModal" class="modal-overlay">
+  <div class="modal-content">
+    <button id="closeFormBtn" class="modal-close" aria-label="Close">&times;</button>
+    <h3 class="modal-heading">Let's Connect</h3>
+    <p class="modal-subtext">Fill this out and Noah will get back to you soon.</p>
+
+    <form id="bookingForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="eventType">Reason for Reaching Out</label>
+        <select id="eventType" name="eventType">
+          <option value="Speaking Inquiry">Speaking Inquiry</option>
+          <option value="Ministry Question">Ministry Question</option>
+          <option value="General">General</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+      </div>
+
+      <button type="submit" class="submit-button" id="submitBtn">Send Message</button>
+    </form>
+
+    <div class="form-success" id="formSuccess">
+      <div class="form-success-icon">✅</div>
+      <h3>Message Sent!</h3>
+      <p>Thanks for reaching out — Noah will get back to you soon.</p>
+    </div>
+  </div>
+</div>
     </div>
   </section>
 
@@ -850,6 +1000,56 @@
       } else {
         nav.style.background = 'rgba(10,15,30,0.85)';
         nav.style.boxShadow = 'none';
+      }
+    });
+        // ── Contact Modal ──
+    const openBtn = document.getElementById('openFormBtn');
+    const closeBtn = document.getElementById('closeFormBtn');
+    const overlay = document.getElementById('formModal');
+    const bookingForm = document.getElementById('bookingForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const formSuccess = document.getElementById('formSuccess');
+
+    openBtn.addEventListener('click', () => overlay.classList.add('active'));
+    closeBtn.addEventListener('click', () => overlay.classList.remove('active'));
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) overlay.classList.remove('active');
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') overlay.classList.remove('active');
+    });
+
+    bookingForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+
+      const data = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        eventType: document.getElementById('eventType').value,
+        message: document.getElementById('message').value,
+      };
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        if (res.ok) {
+          bookingForm.style.display = 'none';
+          formSuccess.classList.add('active');
+        } else {
+          alert('Something went wrong. Please try again or email directly.');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send Message';
+        }
+      } catch (err) {
+        alert('Something went wrong. Please try again or email directly.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message';
       }
     });
   </script>
