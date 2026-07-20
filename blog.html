@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog | Noah Gibson</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy: #0a0f1e;
+      --dark: #0d1526;
+      --blue: #1a3a6b;
+      --accent: #2d6cdf;
+      --bright: #4f8ef7;
+      --glow: rgba(79,142,247,0.15);
+      --text: #e8edf5;
+      --muted: #8a9bb5;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* Reuse existing styles for scrollbar, nav, and footer */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 6%;
+      background: rgba(10,15,30,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(79,142,247,0.1);
+      transition: all 0.3s ease;
+    }
+    .nav-logo { font-size: 1.3rem; font-weight: 800; letter-spacing: 0.5px; color: var(--text); }
+    .nav-logo span { color: var(--bright); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.9rem;
+      font-weight: 500; letter-spacing: 0.3px; transition: color 0.3s; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 2px; background: var(--bright); transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--bright); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      background: var(--accent); color: #fff !important;
+      padding: 0.5rem 1.2rem; border-radius: 50px; font-weight: 600 !important;
+    }
+    .nav-cta:hover { background: var(--bright); }
+    .nav-cta::after { display: none !important; }
+
+    footer {
+      background: #060a14; border-top: 1px solid rgba(79,142,247,0.1);
+      padding: 2rem 6%; display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-name { font-weight: 700; color: var(--text); }
+    .footer-name span { color: var(--bright); }
+    .footer-copy { font-size: 0.8rem; color: var(--muted); }
+
+    /* Blog specific styles */
+    #blog {
+      padding: 6rem 6%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .blog-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .blog-header h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+    }
+    .blog-header p {
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+    .blog-posts {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .blog-post {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(79,142,247,0.15);
+      padding: 1.5rem;
+      border-radius: 10px;
+    }
+    .blog-post h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    .blog-post p {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .read-more-btn {
+      background-color: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 1rem;
+    }
+    .read-more-btn:hover {
+      background-color: var(--bright);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-logo">Noah <span>Gibson</span></div>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-cta">Home</a></li>
+    </ul>
+  </nav>
+
+  <!-- BLOG CONTENT -->
+  <section id="blog">
+    <div class="blog-header">
+      <h1>Welcome to My Blog</h1>
+      <p>Insights, thoughts, and reflections on various topics.</p>
+    </div>
+    <div class="blog-posts">
+      <!-- Example Blog Post -->
+      <article class="blog-post">
+        <h2>AI in creative spaces</h2>
+        <p>WARNING: 100% Human Generated, may contain errors…😂<br><br>Do you remember those magic grow capsules? As a kid, I loved them. You would take this little pill-shaped capsule and put it in water, and then it would rapidly expand into an animal, dinosaur, alien, or whatever, and I was amazed at how rapidly it grew! This is kind of how I feel right now in life about AI. Initially, I was in awe and wonder at the rapidly growing models of ChatGPT, Claude, Grok, Gemini, and many others. But then I started to look at how it is affecting the thing I love most on this planet, people.<br><br>The current environment we live in, as of this writing (07/20/2026), is that 155,000 human people were laid off in 2025 due to AI-related reasons, and in 2026, only halfway through the year, that exact number for 2025 has already been met. We know AI is only just beginning some of this uprooting; as more data centers are completed, each model will have a significant amount of extra capacity.<br><br>I am a pastor, and in no way do I consider myself knowledgeable in all things AI or business, but here’s what I do know, people. Fun, joyful, life-giving, created by God people. As many companies look to eliminate all “redundancies”….people. I think most can see why. For companies that are trying to be the best with no values that limit that growth, they will do everything and anything to get to the top. Even firing hundreds of thousands of people and going “another route,” the AI route that is. See, they are feeling the pressure from their competitors and feel they have to follow suit or else they no longer are current. I come from an establishment that was created thousands of years ago because of one man who walked amongst people, talked amongst people, loved people, and eventually died on a cross for them. I know there are many ways AI can be useful, and this blog is not going to eradicate AI in any way, but what would happen if you gave your 3-year-old nephew a sharp knife because he thought it was cool and he could cut his paper better with it? You would be immediately reprimanded and probably not be able to see your nephew for a while. Oh, and you might have a few cuts; seriously, who would give a three-year-old a knife? Come on man! Here’s the reality that is just flat out wild nobody in their right mind would give a child a knife when they have no idea how to use it or what it is fully capable of, right? But let’s apply this same principle to leaders in an industry filled with the pursuit of making more, more money, more profit, more buisness, more sales…more. What have we seen happen? We have seen people losing their jobs to Artificial Intelligence, not to better humankind but to better a few people’s pockets, greed, and power. The more I write, the more I feel like I am in the matrix. But did I take the blue or red pill???<br><br>In all seriousness, something needs to change; what that might be, you ask? It’s called wisdom and patience. Surely AI will have its place in our life and work, but are we really considering where it shouldn’t be? What it shouldn’t take over? One of the most concerning areas of AI and why you clicked on this link is how it is infiltrating creative spaces. Things like music, movies, design. An art that was once esteemed in our culture is now becoming AI slop because of “time”, “budget cuts”, “quicker output.” But here’s the thing: AI can only create what it already knows. This means that the prompt you give is taking someone else’s work and using similarities to craft its own version of that. Kind of like if your classmate copies your paper but puts their name on it and changes a few sentences. If this trend continues, I fear what it will do to humans. One of the greatest things that drives us is the ability to create and innovate. God made us with this beautiful ability to imagine and create things once thought unfathomable. I fear we are losing our unique identity as humans when we let AI take over all of our spaces, especially those that require real human creativity and interaction. From my perspective as a Christian and pastor, when done right, Music is worship, Design is worship, Movies are worship to the one true God! So why are we replacing people in this wonderful act of worship? People who have created some of the most amazing things imaginable, people whom we love and live life with why?<br><br>I leave you with this. In the Bible, Jesus visits the temple only to see people are selling things inside of the temple. This was a place meant to honor God. This was a place where people came to offer a sacrifice to the Lord, and instead people found a way to commercialize it and exploit the poor. Jesus is not happy, and so in righteous anger he flips the tables and sends away the people doing these horrible acts in the temple. I’m sure many were thinking why is He so mad? We are just simplifying the process; we are just making it more efficient and at the same time making more money. The easiest answer is not always the best answer. No, I’m not comparing your workplace to the holy temple of God, but I am going to leave an open-ended question. Regardless of who you believe Jesus was or is, based on this story found in all four gospels, how do you think Jesus would feel about AI? As someone in ministry, I will ask another question to people in ministry: Have you created a policy on what NOT to use AI for? I think God is very clear on what should never be handed off, because if we want to learn, grow, and be challenged, we have to do the work.<br><br>By the way, this was 100% human generated, If you see any textual errors, guess what? I’m only human, and man, it feels good!</p>
+      </article>
+      <!-- Add more blog posts as needed -->
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-name">Noah <span>Gibson</span></div>
+    <div class="footer-copy">© 2026 Noah Gibson · Pastor & Communicator · Fort Wayne, IN</div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const maxWords = 50; // Adjust this to set how many words you want visible initially
+
+      document.querySelectorAll('.blog-post').forEach(post => {
+        const contentElement = post.querySelector('p');
+        const fullText = contentElement.innerHTML;
+        const words = fullText.split(' ');
+
+        if (words.length > maxWords) {
+          const visibleText = words.slice(0, maxWords).join(' ');
+          const hiddenText = words.slice(maxWords).join(' ');
+
+          contentElement.innerHTML = `${visibleText}<span class="ellipsis">...</span><span class="more-text" style="display:none;"> ${hiddenText}</span>`;
+          const readMoreBtn = document.createElement('button');
+          readMoreBtn.className = 'read-more-btn';
+          readMoreBtn.textContent = 'Read More';
+          post.appendChild(readMoreBtn);
+
+          readMoreBtn.addEventListener('click', function() {
+            const moreText = contentElement.querySelector('.more-text');
+            const ellipsis = contentElement.querySelector('.ellipsis');
+
+            if (moreText.style.display === 'none') {
+              moreText.style.display = 'inline';
+              ellipsis.style.display = 'none';
+              this.textContent = 'Read Less';
+            } else {
+              moreText.style.display = 'none';
+              ellipsis.style.display = 'inline';
+              this.textContent = 'Read More';
+            }
+          });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
